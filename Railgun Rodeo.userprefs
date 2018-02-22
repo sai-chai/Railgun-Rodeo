@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Scripts/EndPanelController.cs">
+    <Files>
+      <File FileName="Assets/_Scripts/RectTraversal.cs" Line="16" Column="56" />
+      <File FileName="Assets/_Scripts/StartPanelController.cs" Line="26" Column="23" />
+      <File FileName="Assets/_Scripts/LevelController.cs" Line="97" Column="44" />
+      <File FileName="Assets/_Scripts/EndPanelController.cs" Line="14" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
