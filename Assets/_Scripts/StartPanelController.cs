@@ -10,33 +10,20 @@ public class StartPanelController : MonoBehaviour {
 	private LevelController level;
 	private GameObject[] intro;
 	public AudioMixer audio;
-	public int introIndex;
+	private int introIndex;
+	public GameObject miscUI;
 
 
 	// Use this for initialization
 	void Start () {
-
-		if (SceneManager.GetActiveScene ().name.Equals ("Level 1")) {
-			level = GameObject.Find ("level").GetComponent<LevelController> ();
-			GameObject temp = gameObject;
-			children = RectTraversal.GetChildren (ref temp);
-			intro = RectTraversal.GetChildren (ref children [3]);
-			gameObject.SetActive (true);
-			audio.FindSnapshot ("Pause").TransitionTo (0f);
-			Time.timeScale = 0;
-			introIndex = 0;
-			intro [0].SetActive (true);
-		}
-
-		if (SceneManager.GetActiveScene ().name.Equals ("Level 2")) {
-			level = GameObject.Find ("level").GetComponent<LevelController> ();
-			GameObject temp = gameObject;
-			children = RectTraversal.GetChildren (ref temp);
-			gameObject.SetActive (true);
-			audio.FindSnapshot ("Pause").TransitionTo (0f);
-			Time.timeScale = 0;
-			introIndex = 0;
-		}
+		level = GameObject.Find ("level").GetComponent<LevelController> ();
+		GameObject temp = gameObject;
+		children = Traversal.GetChildren (ref temp);
+		intro = Traversal.GetChildren (ref children [3]);
+		gameObject.SetActive (true);
+		audio.FindSnapshot ("Pause").TransitionTo (0f);
+		Time.timeScale = 0;
+		introIndex = 0;
 	}
 
 	// Update is called once per frame
@@ -55,13 +42,16 @@ public class StartPanelController : MonoBehaviour {
 		}
 
 		if (SceneManager.GetActiveScene ().name.Equals ("Level 2")) {
-			level = GameObject.Find ("level").GetComponent<LevelController> ();
-			GameObject temp = gameObject;
-			children = RectTraversal.GetChildren (ref temp);
-			gameObject.SetActive (true);
-			audio.FindSnapshot ("Pause").TransitionTo (0f);
-			Time.timeScale = 0;
-			introIndex = 0;
+			if (introIndex < intro.Length-1 && Input.anyKeyDown) {
+				intro [introIndex].SetActive(false);
+				introIndex++;
+				intro [introIndex].SetActive(true);
+				if (introIndex == 1) {
+					children [1].SetActive (false);
+					children [4].SetActive (true);
+					children [5].SetActive (true);
+				}
+			}
 		}
 	}
 
@@ -69,6 +59,7 @@ public class StartPanelController : MonoBehaviour {
 		gameObject.SetActive (false);
 		Time.timeScale = 1;
 		audio.FindSnapshot ("Play").TransitionTo (0f);
+		miscUI.SetActive(true);
 	}
 
 	public void ShowDirections(){

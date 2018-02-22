@@ -24,6 +24,7 @@ public class LevelController : MonoBehaviour {
 	private GameObject startPanel;
 	private GameObject endPanel;
 	private GameObject miscUI;
+	public ShipController ship;
 	private float startTime;
 
 	// Use this for initialization
@@ -63,10 +64,10 @@ public class LevelController : MonoBehaviour {
 				
 			if (SceneManager.GetActiveScene().name.Equals("Level 1") && Time.timeScale != 0f) {
 				if (!isDone) {
-					if (TimeSinceLevelLoad() % 1.5f <= 0.05f) {
+					if (TimeSinceLevelLoad() % 1.5f <= Time.deltaTime) {
 						Instantiate (smallPrefab, spawnArray [randomGen.Next (1, 10)]);
 					}
-					if ((TimeSinceLevelLoad() + 0.055f) % 10f <= 0.05f) {
+					if ((TimeSinceLevelLoad() + Time.deltaTime + 0.005f) % 10f <= Time.deltaTime) {
 						Instantiate (midPrefab, spawnArray [randomGen.Next (1, 10)]);
 					}
 					if (TimeSinceLevelLoad() >= 60f) {
@@ -88,13 +89,13 @@ public class LevelController : MonoBehaviour {
 
 			if (SceneManager.GetActiveScene().name.Equals("Level 2") && Time.timeScale != 0f) {
 				if (!isDone) {
-					if (TimeSinceLevelLoad() % 1.3f <= 0.05f) {
+					if (TimeSinceLevelLoad() % 1.3f <= Time.deltaTime) {
 						Instantiate (smallPrefab, spawnArray [randomGen.Next (1, 10)]);
 					}
-					if ((TimeSinceLevelLoad() + 0.055f) % 10f <= 0.05f) {
+					if ((TimeSinceLevelLoad() + Time.deltaTime + 0.005f) % 10f <= Time.deltaTime) {
 						Instantiate (midPrefab, spawnArray [randomGen.Next (1, 10)]);
 					}
-					if ((TimeSinceLevelLoad() + 0.055f) % 7f <= 0.05f) {
+					if ((TimeSinceLevelLoad() + Time.deltaTime + 0.005f) % 7f <= Time.deltaTime) {
 						GameObject asteroid = Instantiate (asteroidPrefab, spawnArray [randomGen.Next (1, 10)]);
 						asteroid.GetComponent<Rigidbody2D> ().AddForce (new Vector2 (-1.5f, 0f), ForceMode2D.Impulse);
 					}
@@ -144,7 +145,6 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void NextLevel(){
-		ShipController ship = GameObject.Find ("user_craft").GetComponent<ShipController> ();
 		game.ammo = ship.ammo;
 		game.health = ship.health;
 		game.score = score;
